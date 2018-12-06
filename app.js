@@ -30,6 +30,13 @@ app.use(bodyParser.json())
 //Static folder
 app.use(express.static(path.join(__dirname, 'pubic')));
 
+
+//Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+require("./config/passport")(passport);
+
 app.use("/users", users);
 
 app.get("/", (req,res)=>{
