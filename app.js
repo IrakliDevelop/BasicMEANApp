@@ -28,7 +28,7 @@ app.use(cors());
 app.use(bodyParser.json())
 
 //Static folder
-app.use(express.static(path.join(__dirname, 'pubic')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 
 //Passport Middleware
@@ -39,9 +39,13 @@ require("./config/passport")(passport);
 
 app.use("/users", users);
 
-app.get("/", (req,res)=>{
-    res.send("<h1>HOME PAGE</h1>")
-});
+// app.get("/", (req,res)=>{
+//     res.send("<h1>Invalid Endpoint</h1>")
+// });
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
+  });
 
 
 
